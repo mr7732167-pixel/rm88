@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منظمة 88 Network | النظام العسكري المركزي</title>
+    <title>منظمة 88 Network | النظام العسكري المتكامل</title>
     <style>
         * {
             margin: 0;
@@ -24,7 +24,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(5, 7, 12, 0.95);
+            background-color: rgba(5, 7, 12, 0.98);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -35,7 +35,7 @@
             border: 3px solid #dc2626;
             padding: 30px;
             border-radius: 12px;
-            width: 320px;
+            width: 330px;
             box-shadow: 0 0 25px rgba(220, 38, 38, 0.4);
         }
         .auth-box h2 {
@@ -63,14 +63,10 @@
             cursor: pointer;
             margin-top: 10px;
         }
-        .auth-box button:hover {
-            background: #b91c1c;
-        }
+        .auth-box button:hover { background: #b91c1c; }
 
-        /* لوحة التحكم والموقع */
-        #main-app {
-            display: none;
-        }
+        /* الموقع الرئيسي */
+        #main-app { display: none; }
         header {
             margin-top: 15px;
             margin-bottom: 20px;
@@ -78,7 +74,7 @@
             padding-bottom: 15px;
         }
         h1 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: #dc2626;
             margin-bottom: 5px;
         }
@@ -102,9 +98,9 @@
             margin-bottom: 5px;
         }
         
-        /* الخريطة والتفاصيل */
+        /* خريطة مكة المكتوبة والمقسمة لمربعات دقيقة */
         .map-section {
-            max-width: 900px;
+            max-width: 950px;
             margin: 20px auto;
             background: #111827;
             border: 3px solid #dc2626;
@@ -113,14 +109,12 @@
         }
         .map-grid {
             width: 100%;
-            height: 400px;
             background-color: #1a2234;
             border-radius: 8px;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(3, 1fr);
-            gap: 8px;
-            padding: 10px;
+            gap: 10px;
+            padding: 15px;
             border: 1px dashed #dc2626;
         }
         .grid-cell {
@@ -131,19 +125,73 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            min-height: 90px;
             font-size: 0.85rem;
-            padding: 5px;
+            padding: 8px;
             color: #cbd5e1;
         }
         .grid-cell span {
             color: #dc2626;
             font-weight: bold;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
+            margin-bottom: 4px;
         }
 
-        /* لوحة تحكم الأونر والأعضاء */
+        /* نظام الشات (الدردشة) */
+        .chat-section {
+            max-width: 950px;
+            margin: 20px auto;
+            background: #111827;
+            border: 2px solid #dc2626;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: right;
+        }
+        .chat-box {
+            height: 220px;
+            background: #0f172a;
+            border: 1px solid #374151;
+            border-radius: 8px;
+            padding: 10px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .chat-message {
+            background: #1e293b;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        .chat-message b { color: #f87171; }
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+        }
+        .chat-input-area input {
+            flex: 1;
+            padding: 10px;
+            background: #1f2937;
+            border: 1px solid #374151;
+            color: white;
+            border-radius: 6px;
+        }
+        .chat-input-area button {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .chat-input-area button:hover { background: #b91c1c; }
+
+        /* لوحة تحكم الأونر */
         .admin-panel {
-            max-width: 900px;
+            max-width: 950px;
             margin: 20px auto;
             background: #111827;
             border: 2px solid #374151;
@@ -170,7 +218,7 @@
             background: #dc2626;
             color: white;
             border: none;
-            padding: 5px 10px;
+            padding: 5px 12px;
             border-radius: 4px;
             cursor: pointer;
             font-size: 0.8rem;
@@ -183,11 +231,11 @@
     <!-- شاشة تسجيل الدخول -->
     <div id="auth-screen">
         <div class="auth-box">
-            <h2>تسجيل دخول 88</h2>
-            <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 15px;">أدخل اسم المستخدم لتسجيل الدخول للمنظمة</p>
+            <h2>منظمة 88 Network</h2>
+            <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 15px;">سجل دخولك للميدان (الأونر ادخل بكلمة المرور 8888)</p>
             <input type="text" id="username-input" placeholder="اسم المستخدم">
-            <input type="password" id="password-input" placeholder="كلمة المرور (اختياري للأونر)">
-            <button onclick="login()">دخول الميدان</button>
+            <input type="password" id="password-input" placeholder="كلمة المرور (اختياري)">
+            <button onclick="login()">دخول النظام</button>
         </div>
     </div>
 
@@ -209,12 +257,12 @@
                     <p id="display-rank" style="color: #dc2626; font-weight: bold;">[ جندي ]</p>
                 </div>
                 <div class="card">
-                    <h3>المستخدم المسجل</h3>
+                    <h3>المستخدم</h3>
                     <p id="display-user" style="color: #38bdf8; font-weight: bold;"></p>
                 </div>
             </div>
 
-            <!-- خريطة مكة المكتوبة والمقسمة لمربعات (مثل قراند 5) -->
+            <!-- خريطة مكة المكتوبة والمقسمة لمربعات قراند 5 -->
             <div class="map-section">
                 <h2 style="color: #fff; margin-bottom: 10px; font-size: 1.3rem;">خريطة مكة التكتيكية (مربعات 88)</h2>
                 <div class="map-grid">
@@ -233,21 +281,33 @@
                 </div>
             </div>
 
+            <!-- شات الدردشة الميدانية -->
+            <div class="chat-section">
+                <h2 style="color: #dc2626; font-size: 1.2rem; margin-bottom: 10px; text-align: center;">دردشة ميدان 88</h2>
+                <div class="chat-box" id="chat-messages">
+                    <div class="chat-message"><b>النظام العسكري:</b> تم تفعيل قناة الدردشة بنجاح. أهلاً بك في المنظمة.</div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="chat-input" placeholder="اكتب رسالتك للميدان..." onkeypress="handleEnter(event)">
+                    <button onclick="sendMessage()">إرسال</button>
+                </div>
+            </div>
+
             <!-- لوحة تحكم الأونر والأعضاء -->
             <div class="admin-panel" id="admin-section" style="display: none;">
-                <h2>لوحة تحكم الأونر (الرتب والصلاحيات العسكرية)</h2>
+                <h2>لوحة تحكم الأونر (إدارة الرتب والأعضاء)</h2>
                 <div class="member-row">
                     <span>العضو: <b>فيصل</b> (رتبة: ملازم)</span>
                     <div>
-                        <button class="btn-action" onclick="alert('تمت ترقية العضو!')">ترقية</button>
-                        <button class="btn-action" style="background: #374151;" onclick="alert('تم طرد العضو!')">طرد / باند</button>
+                        <button class="btn-action" onclick="alert('تمت ترقية العضو بنجاح!')">ترقية</button>
+                        <button class="btn-action" style="background: #374151;" onclick="alert('تم طرد العضو من المنظمة!')">طرد / باند</button>
                     </div>
                 </div>
                 <div class="member-row">
                     <span>العضو: <b>رامي</b> (رتبة: جندي اول)</span>
                     <div>
-                        <button class="btn-action" onclick="alert('تمت ترقية العضو!')">ترقية</button>
-                        <button class="btn-action" style="background: #374151;" onclick="alert('تم طرد العضو!')">طرد / باند</button>
+                        <button class="btn-action" onclick="alert('تمت ترقية العضو بنجاح!')">ترقية</button>
+                        <button class="btn-action" style="background: #374151;" onclick="alert('تم طرد العضو من المنظمة!')">طرد / باند</button>
                     </div>
                 </div>
             </div>
@@ -255,6 +315,8 @@
     </div>
 
     <script>
+        let currentUsername = "";
+
         function login() {
             const username = document.getElementById('username-input').value.trim();
             const password = document.getElementById('password-input').value.trim();
@@ -264,16 +326,38 @@
                 return;
             }
 
+            currentUsername = username;
             document.getElementById('auth-screen').style.display = 'none';
             document.getElementById('main-app').style.display = 'block';
             document.getElementById('display-user').innerText = username;
 
-            // إذا دخلت أنت بكلمة سر الأونر أو اسمك الخاص يعطيك رتبة الأونر تلقائياً
-            if(username === 'الونر' || username === 'owner' || password === '8888') {
+            // التحقق من صلاحيات الأونر
+            if(username.toLowerCase() === 'owner' || username === 'الونر' || password === '8888') {
                 document.getElementById('display-rank').innerText = '[ الأونر / General ]';
                 document.getElementById('admin-section').style.display = 'block';
             } else {
                 document.getElementById('display-rank').innerText = '[ جندي / Private ]';
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            if(!message) return;
+
+            const chatBox = document.getElementById('chat-messages');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'chat-message';
+            msgDiv.innerHTML = `<b>${currentUsername}:</b> ${message}`;
+            chatBox.appendChild(msgDiv);
+            
+            input.value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function handleEnter(e) {
+            if(e.key === 'Enter') {
+                sendMessage();
             }
         }
     </script>
