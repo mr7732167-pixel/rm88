@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منظمة 88 Network | نظام الإدارة والخريطة</title>
+    <title>منظمة 88 Network | النظام العسكري المركزي</title>
     <style>
         * {
             margin: 0;
@@ -12,107 +12,270 @@
             font-family: Tahoma, sans-serif;
         }
         body {
-            background-color: #0b0f19; /* أسود فخم مائل للداكن */
+            background-color: #080b12;
             color: #ffffff;
             text-align: center;
-            padding: 20px;
+            padding: 15px;
+        }
+        /* شاشة تسجيل الدخول */
+        #auth-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(5, 7, 12, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .auth-box {
+            background: #111827;
+            border: 3px solid #dc2626;
+            padding: 30px;
+            border-radius: 12px;
+            width: 320px;
+            box-shadow: 0 0 25px rgba(220, 38, 38, 0.4);
+        }
+        .auth-box h2 {
+            color: #dc2626;
+            margin-bottom: 20px;
+        }
+        .auth-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background: #1f2937;
+            border: 1px solid #374151;
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .auth-box button {
+            width: 100%;
+            padding: 10px;
+            background: #dc2626;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .auth-box button:hover {
+            background: #b91c1c;
+        }
+
+        /* لوحة التحكم والموقع */
+        #main-app {
+            display: none;
         }
         header {
-            margin-top: 30px;
+            margin-top: 15px;
             margin-bottom: 20px;
-            border-bottom: 2px solid #dc2626; /* أحمر عسكري */
+            border-bottom: 2px solid #dc2626;
             padding-bottom: 15px;
         }
         h1 {
-            font-size: 2.3rem;
-            color: #dc2626; /* أحمر */
+            font-size: 2rem;
+            color: #dc2626;
             margin-bottom: 5px;
-        }
-        p.subtitle {
-            color: #94a3b8;
-            font-size: 1.1rem;
         }
         .dashboard {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin: 20px 0;
+            gap: 12px;
+            margin: 15px 0;
             flex-wrap: wrap;
         }
         .card {
-            background-color: #1e1e24;
+            background-color: #111827;
             border: 2px solid #dc2626;
             border-radius: 8px;
-            padding: 15px 25px;
-            min-width: 150px;
+            padding: 12px 20px;
+            min-width: 160px;
         }
         .card h3 {
             color: #ef4444;
-            font-size: 1.2rem;
+            font-size: 1rem;
             margin-bottom: 5px;
         }
+        
+        /* الخريطة والتفاصيل */
         .map-section {
             max-width: 900px;
-            margin: 30px auto;
+            margin: 20px auto;
             background: #111827;
             border: 3px solid #dc2626;
             border-radius: 12px;
             padding: 15px;
-            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.2);
         }
         .map-grid {
             width: 100%;
-            height: 450px;
-            background-color: #1f2937;
+            height: 400px;
+            background-color: #1a2234;
             border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #94a3b8;
-            font-size: 1.2rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 8px;
+            padding: 10px;
             border: 1px dashed #dc2626;
         }
-        footer {
-            margin-top: 40px;
-            color: #64748b;
+        .grid-cell {
+            background: #232d42;
+            border: 1px solid #374151;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             font-size: 0.85rem;
+            padding: 5px;
+            color: #cbd5e1;
         }
+        .grid-cell span {
+            color: #dc2626;
+            font-weight: bold;
+            font-size: 0.75rem;
+        }
+
+        /* لوحة تحكم الأونر والأعضاء */
+        .admin-panel {
+            max-width: 900px;
+            margin: 20px auto;
+            background: #111827;
+            border: 2px solid #374151;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: right;
+        }
+        .admin-panel h2 {
+            color: #dc2626;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .member-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #1f2937;
+            padding: 8px 12px;
+            margin: 8px 0;
+            border-radius: 6px;
+        }
+        .btn-action {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        .btn-action:hover { background: #b91c1c; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>منظمة 88 Network</h1>
-        <p class="subtitle">النظام العسكري المركزي - مكة المكرمة</p>
-    </header>
-
-    <main>
-        <div class="dashboard">
-            <div class="card">
-                <h3>حالة النظام</h3>
-                <p>متصل (الرتب مفعلة)</p>
-            </div>
-            <div class="card">
-                <h3>الرتبة الحالية</h3>
-                <p style="color: #dc2626; font-weight: bold;">[ الأونر / General ]</p>
-            </div>
-            <div class="card">
-                <h3>خريطة الميدان</h3>
-                <p>مكة المكرمة (نظام مربعات GTA)</p>
-            </div>
+    <!-- شاشة تسجيل الدخول -->
+    <div id="auth-screen">
+        <div class="auth-box">
+            <h2>تسجيل دخول 88</h2>
+            <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 15px;">أدخل اسم المستخدم لتسجيل الدخول للمنظمة</p>
+            <input type="text" id="username-input" placeholder="اسم المستخدم">
+            <input type="password" id="password-input" placeholder="كلمة المرور (اختياري للأونر)">
+            <button onclick="login()">دخول الميدان</button>
         </div>
+    </div>
 
-        <div class="map-section">
-            <h2 style="color: #fff; margin-bottom: 10px;">خريطة مكة التكتيكية (مربعات 88)</h2>
-            <div class="map-grid">
-                [ هنا تظهر خريطة مكة المبرمجة مع المربعات وأسماء المحلات مثل ماكدونالدز وغيرها ]
+    <!-- الموقع الرئيسي -->
+    <div id="main-app">
+        <header>
+            <h1>منظمة 88 Network</h1>
+            <p style="color: #94a3b8;">النظام العسكري المركزي - مكة المكرمة</p>
+        </header>
+
+        <main>
+            <div class="dashboard">
+                <div class="card">
+                    <h3>حالة النظام</h3>
+                    <p>متصل وآمن</p>
+                </div>
+                <div class="card">
+                    <h3>رتبتك الحالية</h3>
+                    <p id="display-rank" style="color: #dc2626; font-weight: bold;">[ جندي ]</p>
+                </div>
+                <div class="card">
+                    <h3>المستخدم المسجل</h3>
+                    <p id="display-user" style="color: #38bdf8; font-weight: bold;"></p>
+                </div>
             </div>
-        </div>
-    </main>
 
-    <footer>
-        <p>جميع الحقوق محفوظة لصالح منظمة 88 Network © 2026</p>
-    </footer>
+            <!-- خريطة مكة المكتوبة والمقسمة لمربعات (مثل قراند 5) -->
+            <div class="map-section">
+                <h2 style="color: #fff; margin-bottom: 10px; font-size: 1.3rem;">خريطة مكة التكتيكية (مربعات 88)</h2>
+                <div class="map-grid">
+                    <div class="grid-cell"><span>مربع A-1</span>حي الإفلاس / الحرم</div>
+                    <div class="grid-cell"><span>مربع A-2</span>ماكدونالدز (الشارع العام)</div>
+                    <div class="grid-cell"><span>مربع A-3</span>نقطة تفتيش الشرطة</div>
+                    <div class="grid-cell"><span>مربع A-4</span>محطة الوقود الكبرى</div>
+                    <div class="grid-cell"><span>مربع B-1</span>قاعدة 88 العسكرية</div>
+                    <div class="grid-cell"><span>مربع B-2</span>منطقة العمليات الخاصة</div>
+                    <div class="grid-cell"><span>مربع B-3</span>برج الإتصالات</div>
+                    <div class="grid-cell"><span>مربع B-4</span>المستشفى المركزي</div>
+                    <div class="grid-cell"><span>مربع C-1</span>مستودعات المنظمة</div>
+                    <div class="grid-cell"><span>مربع C-2</span>سوق التجارة المركزي</div>
+                    <div class="grid-cell"><span>مربع C-3</span>حي الأبراج السكنية</div>
+                    <div class="grid-cell"><span>مربع C-4</span>منطقة الإخلاء الطارئ</div>
+                </div>
+            </div>
 
+            <!-- لوحة تحكم الأونر والأعضاء -->
+            <div class="admin-panel" id="admin-section" style="display: none;">
+                <h2>لوحة تحكم الأونر (الرتب والصلاحيات العسكرية)</h2>
+                <div class="member-row">
+                    <span>العضو: <b>فيصل</b> (رتبة: ملازم)</span>
+                    <div>
+                        <button class="btn-action" onclick="alert('تمت ترقية العضو!')">ترقية</button>
+                        <button class="btn-action" style="background: #374151;" onclick="alert('تم طرد العضو!')">طرد / باند</button>
+                    </div>
+                </div>
+                <div class="member-row">
+                    <span>العضو: <b>رامي</b> (رتبة: جندي اول)</span>
+                    <div>
+                        <button class="btn-action" onclick="alert('تمت ترقية العضو!')">ترقية</button>
+                        <button class="btn-action" style="background: #374151;" onclick="alert('تم طرد العضو!')">طرد / باند</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function login() {
+            const username = document.getElementById('username-input').value.trim();
+            const password = document.getElementById('password-input').value.trim();
+            
+            if(!username) {
+                alert('الرجاء إدخال اسم المستخدم!');
+                return;
+            }
+
+            document.getElementById('auth-screen').style.display = 'none';
+            document.getElementById('main-app').style.display = 'block';
+            document.getElementById('display-user').innerText = username;
+
+            // إذا دخلت أنت بكلمة سر الأونر أو اسمك الخاص يعطيك رتبة الأونر تلقائياً
+            if(username === 'الونر' || username === 'owner' || password === '8888') {
+                document.getElementById('display-rank').innerText = '[ الأونر / General ]';
+                document.getElementById('admin-section').style.display = 'block';
+            } else {
+                document.getElementById('display-rank').innerText = '[ جندي / Private ]';
+            }
+        }
+    </script>
 </body>
 </html>
